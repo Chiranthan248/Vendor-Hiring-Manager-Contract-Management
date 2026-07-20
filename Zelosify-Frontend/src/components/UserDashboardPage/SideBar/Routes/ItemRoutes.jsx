@@ -1,0 +1,71 @@
+import {
+  LogOut,
+  Settings,
+  CreditCard,
+  Headset,
+  Smile,
+  Scale3DIcon,
+  Frown,
+  Briefcase,
+  Users,
+} from "lucide-react";
+import { MdDataUsage } from "react-icons/md";
+
+const getOverviewItemsByRole = (role) => {
+  switch (role) {
+    case "VENDOR_MANAGER":
+      return [
+        {
+          title: "Smile",
+          href: "#",
+          icon: Smile,
+          hasSubmenu: true,
+          submenu: [{ title: "Sad", href: "/user", icon: Frown }],
+        },
+      ];
+    case "BUSINESS_USER":
+      return [
+        {
+          title: "Digital",
+          href: "/business-user/digital-initiative",
+          icon: MdDataUsage,
+        },
+        {
+          title: "Dummy Page 1",
+          href: "/business-user/dummy-page-1",
+          icon: Scale3DIcon,
+        },
+      ];
+    case "IT_VENDOR":
+      return [
+        { title: "Openings", href: "/vendor/openings", icon: Briefcase },
+        { title: "Payments", href: "/vendor/payments", icon: CreditCard },
+      ];
+    case "HIRING_MANAGER":
+      return [
+        { title: "My Openings", href: "/hiring-manager/openings", icon: Users },
+      ];
+    default:
+      return [];
+  }
+};
+
+export const getSidebarSectionsByRole = (role) => {
+  const overviewItems = getOverviewItemsByRole(role);
+  if (overviewItems.length === 0) return [];
+  return [{ title: "Overview", items: overviewItems }];
+};
+
+export const supportItem = {
+  title: "Support",
+  href: "/user/support",
+  icon: Headset,
+};
+
+export const settingsItem = {
+  title: "Settings",
+  href: "/user/settings",
+  icon: Settings,
+};
+
+export const signOutItem = { title: "Sign Out", href: "#", icon: LogOut };
